@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Auth API",
+        "description": "API для регистрации/редактирования/удаления/просмотра пользователей.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "summary": "Регистрация нового пользователя",
+                "operationId": "33aca734adfb29a993a65f689b28bbd7",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "UserName пользователя (не Name)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Имя пользователя",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Пользователь зарегистрирован"
+                    },
+                    "422": {
+                        "description": "Неправильные UserName или Email"
+                    }
+                }
+            }
+        },
+        "/api/user": {
+            "get": {
+                "summary": "Просмотр информации пользователя",
+                "operationId": "24a7d897f81dbea5540689037c836f9f",
+                "parameters": [
+                    {
+                        "name": "user-id",
+                        "in": "header",
+                        "description": "id пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Данные получены"
+                    },
+                    "401": {
+                        "description": "Вы не авторизованы или заблокированы"
+                    }
+                }
+            }
+        },
+        "/api/update": {
+            "post": {
+                "summary": "Редактирование информации пользователя",
+                "operationId": "e9dd4e0cc7bf91de49b4582df937e3b7",
+                "parameters": [
+                    {
+                        "name": "user-id",
+                        "in": "header",
+                        "description": "id пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "UserName пользователя (не Name)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Имя пользователя",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Данные обновлены"
+                    },
+                    "401": {
+                        "description": "Вы не авторизованы или заблокированы"
+                    },
+                    "422": {
+                        "description": "Неправильные новые данные"
+                    }
+                }
+            }
+        },
+        "/api/delete": {
+            "post": {
+                "summary": "Удаление пользователя",
+                "operationId": "4e5e4bced380543e6519f3504e4440bc",
+                "parameters": [
+                    {
+                        "name": "user-id",
+                        "in": "header",
+                        "description": "id пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Пользователь удален"
+                    },
+                    "401": {
+                        "description": "Вы не авторизованы или заблокированы"
+                    }
+                }
+            }
+        }
+    }
+}
